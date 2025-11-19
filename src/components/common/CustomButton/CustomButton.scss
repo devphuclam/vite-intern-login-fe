@@ -13,6 +13,8 @@
   .label {
     font-size: 0.875rem;
     line-height: 1.25rem;
+    font-weight: 600;
+    letter-spacing: '-0.6%';
   }
 }
 
@@ -23,6 +25,6 @@
 }
 
 .active {
-  background: #3b82f6;
-  color: white;
+  background: rgba(64, 224, 208, 1);
+  color: rgba(37, 37, 37, 1);
 }

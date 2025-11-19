@@ -11,6 +11,8 @@ const LoginPage = () => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
 
+  const isDisabled = !clientAccountId || !userId || !password;
+
   return (
     <div className='login-container'>
       {/* LEFT SIDE IMAGE */}
@@ -62,7 +64,7 @@ const LoginPage = () => {
           <a href='#' className='forgot-password-link'>
             Forgot password?
           </a>
-          <CustomButton label='Login' isDisabled={true} />
+          <CustomButton label='Login' isDisabled={isDisabled} />
         </div>
       </div>
     </div>

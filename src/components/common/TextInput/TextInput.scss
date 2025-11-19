@@ -14,7 +14,7 @@
   .text-input-content {
     display: flex;
     align-items: center;
-    border: 1px solid rgba(200, 200, 200, 1);
+    border: 1px solid rgba(225, 228, 234, 1);
     width: 60%;
     border-radius: 16px;
     padding-top: 10px;
@@ -35,8 +35,30 @@
       font-weight: 400;
       font-style: normal;
       line-height: 1.5rem;
-      color: rgba(37, 37, 37, 1);
+      color: rgba(158, 163, 173, 1);
       width: 100%;
+      transition: font-weight 0.15s ease;
     }
+
+    /* Hover effect */
+    &:hover {
+      border-color: rgba(174, 178, 186, 1);
+
+      input {
+        font-weight: 600;
+      }
+    }
+
+    &:focus-within {
+      border-color: rgba(64, 224, 208, 1);
+      border-width: 2px;
+
+      input {
+        font-weight: 400;
+      }
+    }
+  }
+  :hover {
+    cursor: pointer;
   }
 }
