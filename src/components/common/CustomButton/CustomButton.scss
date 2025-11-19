@@ -1,0 +1,28 @@
+.custom-button-container {
+  display: inline-flex;
+  width: 40%;
+  align-items: center;
+  gap: 8px;
+  padding: 0.625rem 1rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  justify-content: center;
+
+  .label {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+.disabled {
+  background-color: rgba(225, 228, 234, 1);
+  cursor: not-allowed;
+  color: rgba(174, 178, 186, 1);
+}
+
+.active {
+  background: #3b82f6;
+  color: white;
+}
