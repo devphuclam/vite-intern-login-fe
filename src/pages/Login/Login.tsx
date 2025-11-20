@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './login.scss';
 import { IMAGES } from '../../assets/images';
-// import { ICONS } from '../../assets/icons';
 import UserLine from '../../assets/icons/user-line.svg?react';
 import LockLine from '../../assets/icons/lock-line.svg?react';
+import ErrorWarningImage from '../../assets/images/error-warning-fill.svg?react';
+import AlertImage from '../../assets/images/alert-fill.svg?react';
 import TextInput from '../../components/common/TextInput/TextInput';
 import CustomButton from '../../components/common/CustomButton/CustomButton';
+import AlertModal from '../../components/common/AlertModal/AlertModal';
 import { useState } from 'react';
 
 const correctForm = {
@@ -23,6 +25,11 @@ const LoginPage = () => {
     userId: '',
     password: '',
   });
+
+  const [count, setCount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPasswordExpiredModalOpen, setIsPasswordExpiredModalOpen] =
+    useState(false);
 
   const isDisabled = !clientAccountId || !userId || !password;
 
@@ -54,6 +61,20 @@ const LoginPage = () => {
     if (!hasError) {
       console.log('Login success!');
       alert('Login success!');
+    }
+
+    if (hasError) {
+      const newCount = count + 1;
+      setCount(newCount);
+      console.log('Login failed! Attempt count: ', newCount);
+
+      if (newCount >= 3) {
+        setIsModalOpen(true);
+      }
+    }
+
+    if (password === 'expired') {
+      setIsPasswordExpiredModalOpen(true);
     }
   };
   return (
@@ -126,6 +147,25 @@ const LoginPage = () => {
           />
         </div>
       </div>
+      <AlertModal
+        open={isModalOpen}
+        title='Failed Login Attempts Exceeded'
+        message='Your Account is disabled. Please contact your HR Administrator to enable your Account.'
+        icon={<ErrorWarningImage />}
+        onClose={() => {
+          setIsModalOpen(false);
+          setCount(0);
+        }}
+      />
+      <AlertModal
+        open={isPasswordExpiredModalOpen}
+        title='Temporary Password Expired'
+        message='Your temporary password has expired. Please generate a new one.'
+        icon={<AlertImage />}
+        onClose={() => {
+          setIsPasswordExpiredModalOpen(false);
+        }}
+      />
     </div>
   );
 };
