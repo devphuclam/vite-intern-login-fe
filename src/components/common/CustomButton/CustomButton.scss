@@ -28,3 +28,32 @@
   background: rgba(64, 224, 208, 1);
   color: rgba(37, 37, 37, 1);
 }
+
+/* ========================= */
+/* 📌 Tablet — max-width:1024 */
+/* ========================= */
+@media (max-width: 1024px) {
+  .custom-button-container {
+    width: 55%;
+    padding: 0.75rem 1.25rem;
+
+    .label {
+      font-size: 1rem;
+    }
+  }
+}
+
+/* ========================= */
+/* 📌 Mobile — max-width:640 */
+/* ========================= */
+@media (max-width: 640px) {
+  .custom-button-container {
+    width: 100%;
+    padding: 0.875rem 1.25rem;
+
+    .label {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+  }
+}

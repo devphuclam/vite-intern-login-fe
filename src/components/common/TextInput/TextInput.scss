@@ -79,3 +79,51 @@
     cursor: pointer;
   }
 }
+
+/* ========================= */
+/* 📌 Tablet — max-width:1024 */
+/* ========================= */
+@media (max-width: 1024px) {
+  .text-input-container {
+    .text-input-content {
+      width: 70%; /* Tablet rộng hơn để dễ nhập */
+      padding: 12px 14px;
+
+      input {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+/* ========================= */
+/* 📌 Mobile — max-width:640 */
+/* ========================= */
+@media (max-width: 640px) {
+  .text-input-container {
+    width: 100%;
+
+    .text-input-content {
+      width: 80%; /* Mobile full width */
+      padding: 14px 16px;
+      border-radius: 14px;
+
+      img {
+        width: 18px;
+        height: 18px;
+      }
+
+      input {
+        font-size: 0.95rem;
+      }
+    }
+
+    .text-input-label {
+      font-size: 0.8rem;
+    }
+
+    .error-place-holder .text-input-error {
+      font-size: 0.7rem;
+    }
+  }
+}
