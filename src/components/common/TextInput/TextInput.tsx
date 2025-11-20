@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './TextInput.scss';
-import { ICONS } from '../../../assets/icons';
+// import { ICONS } from '../../../assets/icons';
+import EyeLine from '../../../assets/icons/eye-line.svg?react';
+import EyeOffLine from '../../../assets/icons/eye-off-line.svg?react';
+import UserLine from '../../../assets/icons/user-line.svg?react';
 import { useState } from 'react';
 
 type TextInputProps = {
@@ -8,7 +11,8 @@ type TextInputProps = {
   type?: string;
   value: string;
   placeholder?: string;
-  icon?: string;
+  icon?: React.ReactNode;
+  error?: string;
   onChange: (value: string) => void;
 };
 
@@ -18,10 +22,12 @@ const TextInput = ({
   value,
   placeholder,
   icon,
+  error,
   onChange,
 }: TextInputProps) => {
   const [visible, setVisible] = useState(false);
-  const inputType = type === 'password' && !visible ? 'password' : 'text';
+  const inputType =
+    type === 'password' ? (visible ? 'text' : 'password') : type;
 
   return (
     <div className='text-input-container'>
@@ -30,8 +36,8 @@ const TextInput = ({
           {label} <span style={{ color: 'red' }}>*</span>
         </p>
       </div>
-      <div className='text-input-content'>
-        <img src={icon || ICONS.USER_LINE} alt='input-icon' />
+      <div className={`text-input-content ${error ? 'error' : ''}`}>
+        {icon && <div className='input-icon'>{icon}</div>}
         <input
           type={inputType}
           value={value}
@@ -40,14 +46,18 @@ const TextInput = ({
         />
         {/* toggle visibility only for password */}
         {type === 'password' && (
-          <img
-            src={visible ? ICONS.EYE_LINE : ICONS.EYE_OFF_LINE}
-            alt='toggle-password-visibility'
+          <div
             className='password-toggle-icon'
             onClick={() => setVisible(!visible)}
             style={{ cursor: 'pointer' }}
-          />
+          >
+            {visible ? <EyeLine /> : <EyeOffLine />}
+          </div>
         )}
+      </div>
+      {/* Error Message */}
+      <div className='error-place-holder'>
+        {error && <p className='text-input-error'>{error}</p>}
       </div>
     </div>
   );

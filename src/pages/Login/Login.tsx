@@ -1,18 +1,61 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './login.scss';
 import { IMAGES } from '../../assets/images';
-import { ICONS } from '../../assets/icons';
+// import { ICONS } from '../../assets/icons';
+import UserLine from '../../assets/icons/user-line.svg?react';
+import LockLine from '../../assets/icons/lock-line.svg?react';
 import TextInput from '../../components/common/TextInput/TextInput';
 import CustomButton from '../../components/common/CustomButton/CustomButton';
 import { useState } from 'react';
+
+const correctForm = {
+  clientAccountId: 'PD1234',
+  userId: 'PD1234',
+  password: 'password123',
+};
 
 const LoginPage = () => {
   const [clientAccountId, setClientAccountId] = useState('');
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({
+    clientAccountId: '',
+    userId: '',
+    password: '',
+  });
 
   const isDisabled = !clientAccountId || !userId || !password;
 
+  const validateForm = () => {
+    const newErrors = {
+      clientAccountId: '',
+      userId: '',
+      password: '',
+    };
+
+    if (clientAccountId !== correctForm.clientAccountId) {
+      newErrors.clientAccountId = 'ⓘ Client Account ID is not found.';
+    }
+
+    if (userId !== correctForm.userId) {
+      newErrors.userId = ' ';
+    }
+
+    if (password !== correctForm.password) {
+      newErrors.password =
+        'ⓘ You have entered the incorrect User ID and/or Password. Please try again.';
+    }
+
+    setErrors(newErrors);
+
+    // nếu không có lỗi thì xử lý tiếp login
+    const hasError = Object.values(newErrors).some((e) => e !== '');
+
+    if (!hasError) {
+      console.log('Login success!');
+      alert('Login success!');
+    }
+  };
   return (
     <div className='login-container'>
       {/* LEFT SIDE IMAGE */}
@@ -40,31 +83,47 @@ const LoginPage = () => {
             type='text'
             value={clientAccountId}
             placeholder='Eg: PD1234'
-            icon={ICONS.USER_LINE}
-            onChange={setClientAccountId}
+            icon={<UserLine />}
+            onChange={(val) => {
+              setClientAccountId(val);
+              setErrors({ ...errors, clientAccountId: '' });
+            }}
+            error={errors.clientAccountId}
           />
           <TextInput
             label='User ID'
             type='text'
             value={userId}
             placeholder='Eg: PD1234'
-            icon={ICONS.USER_LINE}
-            onChange={setUserId}
+            icon={<UserLine />}
+            onChange={(val) => {
+              setUserId(val);
+              setErrors({ ...errors, userId: '' });
+            }}
+            error={errors.userId}
           />
           <TextInput
             label='Password'
             type='password'
             value={password}
             placeholder='• • • • • • • • • •'
-            icon={ICONS.LOCK_LINE}
-            onChange={setPassword}
+            icon={<LockLine />}
+            onChange={(val) => {
+              setPassword(val);
+              setErrors({ ...errors, password: '' });
+            }}
+            error={errors.password}
           />
         </div>
         <div className='button-section'>
           <a href='#' className='forgot-password-link'>
             Forgot password?
           </a>
-          <CustomButton label='Login' isDisabled={isDisabled} />
+          <CustomButton
+            label='Login'
+            isDisabled={isDisabled}
+            onClick={validateForm}
+          />
         </div>
       </div>
     </div>

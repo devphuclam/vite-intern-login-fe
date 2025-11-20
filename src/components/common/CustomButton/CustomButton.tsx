@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import './CustomButton.scss';
-import { ICONS } from '../../../assets/icons';
 
 type CustomButtonProps = {
   label: string;

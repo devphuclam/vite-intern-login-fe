@@ -19,9 +19,9 @@
     border-radius: 16px;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 16px;
+    padding-left: 10px;
     padding-right: 12px;
-    gap: 8px;
+    gap: 0.5rem;
 
     img {
       width: 20px;
@@ -58,6 +58,23 @@
       }
     }
   }
+
+  /* Error border ACTIVE */
+  .text-input-content.error {
+    border-color: red !important;
+  }
+  .error-place-holder {
+    min-height: 1.125rem;
+
+    .text-input-error {
+      font-size: 0.75rem;
+      color: red;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+  }
+  /* Error text */
+
   :hover {
     cursor: pointer;
   }
